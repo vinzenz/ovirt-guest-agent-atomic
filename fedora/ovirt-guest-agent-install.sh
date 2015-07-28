@@ -13,7 +13,6 @@ fi
 echo "Installing $ovirt_dbus to $prefix/$dbusdir/"
 cp  $dbusdir/$ovirt_dbus $prefix/$dbusdir/
 
-
 # Add the ovirtagent user and group
 
 hostgroup=`nsenter --mount=/host/proc/1/ns/mnt -- getent group ovirtagent`

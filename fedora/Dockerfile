@@ -1,12 +1,12 @@
 FROM fedora
 MAINTAINER Vinzenz Feenstra <vfeenstr@redhat.com>
 
-RUN yum update -y; \
-yum -y install ovirt-guest-agent-common; \
-yum clean all
+RUN dnf update -y; \
+dnf -y install --enablerepo=updates-testing ovirt-guest-agent-common; \
+dnf clean all
 
 # Debug only, can be removed
-RUN yum -y install file strace less dbus
+# RUN dnf -y install file strace less dbus
 
 LABEL Version=1.0
 LABEL Vendor="Red Hat" License="ASL 2.0"
@@ -18,9 +18,13 @@ LABEL RUN="docker run --privileged --pid=host --net=host -v /sysroot:/sysroot -v
 
 ADD ovirt-guest-agent-install.sh /usr/local/bin/
 ADD ovirt-guest-agent-uninstall.sh /usr/local/bin/
+ADD ovirt-container-shutdown.sh /usr/local/bin/
+ADD ovirt-container-hibernate.sh /usr/local/bin/
 
 CMD /sbin/modprobe virtio_console; \
 /bin/touch /run/ovirt-guest-agent.pid; \
 /bin/chown ovirtagent:ovirtagent /run/ovirt-guest-agent.pid; \
+/bin/ln -sf /usr/local/bin/ovirt-container-shutdown.sh /usr/share/ovirt-guest-agent/ovirt-shutdown; \
+/bin/ln -sf /usr/local/bin/ovirt-container-hibernate.sh /usr/share/ovirt-guest-agent/ovirt-hibernate; \
 /usr/bin/python /usr/share/ovirt-guest-agent/ovirt-guest-agent.py
 
