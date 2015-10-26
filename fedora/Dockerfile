@@ -1,15 +1,15 @@
 FROM fedora:22
 MAINTAINER Vinzenz Feenstra <evilissimo@redhat.com>
 
-RUN yum -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs;
+RUN dnf -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs;
 ADD ovirt-guest-agent-common-1.0.11-1.fc22.noarch.rpm /root/
-RUN yum update -y; \
-	yum -y install /root/ovirt-guest-agent-common-1.0.11-1.fc22.noarch.rpm; \
-	yum clean all
+RUN dnf update -y; \
+	dnf -y install /root/ovirt-guest-agent-common-1.0.11-1.fc22.noarch.rpm; \
+	dnf clean all
 
 
 # Debug only, can be removed
-# RUN yum -y install file strace less dbus
+# RUN dnf -y install file strace less dbus
 
 LABEL Version=1.0.11-2
 LABEL Vendor="Red Hat"
