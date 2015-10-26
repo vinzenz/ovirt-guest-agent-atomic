@@ -2,7 +2,7 @@ FROM fedora
 MAINTAINER Vinzenz Feenstra <vfeenstr@redhat.com>
 
 RUN dnf update -y; \
-dnf -y install --enablerepo=updates-testing ovirt-guest-agent-common; \
+dnf -y install ovirt-guest-agent-common; \
 dnf clean all
 
 # Debug only, can be removed
