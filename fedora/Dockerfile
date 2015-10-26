@@ -1,10 +1,10 @@
-FROM centos:centos7
+FROM fedora:22
 MAINTAINER Vinzenz Feenstra <evilissimo@redhat.com>
 
 RUN yum -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs;
-ADD ovirt-guest-agent-common-1.0.11-1.el7.noarch.rpm /root/
+ADD ovirt-guest-agent-common-1.0.11-1.fc22.noarch.rpm /root/
 RUN yum update -y; \
-	yum -y install /root/ovirt-guest-agent-common-1.0.11-1.el7.noarch.rpm; \
+	yum -y install /root/ovirt-guest-agent-common-1.0.11-1.fc22.noarch.rpm; \
 	yum clean all
 
 
