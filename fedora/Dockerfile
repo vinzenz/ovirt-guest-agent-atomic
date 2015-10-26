@@ -1,7 +1,6 @@
 FROM fedora:22
 MAINTAINER Vinzenz Feenstra <evilissimo@redhat.com>
 
-RUN dnf --allowerasing install systemd systemd-libs;
 ADD ovirt-guest-agent-common-1.0.11-1.fc22.noarch.rpm /root/
 RUN dnf update -y; \
 	dnf -y install /root/ovirt-guest-agent-common-1.0.11-1.fc22.noarch.rpm; \
